@@ -51,8 +51,12 @@ public class MyMain {
 
     // Tail Recursive Method:
     public static int sumTR(int[] arr, int i, int sum) {
-        // YOUR CODE HERE
-        return -1;
+        if(i==arr.length){
+            return sum;
+        }
+        else{
+            return(sumTR(arr, i+1, sum+arr[i]));
+        }
     }
 
 
@@ -69,14 +73,20 @@ public class MyMain {
 
     // Wrapper Method (Provided for you):
     public static boolean search(ArrayList<Integer> list, int x) {
-        // YOUR CODE HERE
-        return false;
+        return searchTR(list, x, 0);
     }
 
     // Tail Recursive Method:
     public static boolean searchTR(ArrayList<Integer> list, int x, int i) {
-        // YOUR CODE HERE
-        return false;
+        if(i==list.size()){
+            return false;
+        }
+        else if(list.get(i)==x){
+            return true;
+        }
+        else{
+            return searchTR(list,x, i+1);
+        }
     }
 
 
@@ -89,8 +99,19 @@ public class MyMain {
 
     // Wrapper Method (Provided for you):
     public static boolean allEven(int[] arr) {
-        // YOUR CODE HERE
-        return false;
+        return allEvenTR(arr, 0);
+    }
+
+    public static boolean allEvenTR(int[] arr, int i){
+        if(arr[i]%2!=0){
+            return false;
+        }
+        if(arr[i]==arr.length){
+            return true;
+        }
+        else{
+            return allEvenTR(arr, i+1);
+        }
     }
 
     // Tail Recursive Method:
@@ -136,19 +157,31 @@ public class MyMain {
 
     // Wrapper method
     public static boolean hasCountCopies(int[] arr, int x, int count) {
-        // YOUR CODE HERE
-        return false;
+
+        return hasCountCopiesTR(arr,x,count,0, 0);
     }
 
     // You may want a tail recursive method
-
+public static boolean hasCountCopiesTR(int[]arr, int x, int count, int countTemp, int i){
+        if(countTemp!=count && i==arr.length){
+            return false;
+        }
+        else if(countTemp==count && i==arr.length){
+            return true;
+        }
+        else if(arr[i]==x){
+            return hasCountCopiesTR(arr, x, count, countTemp+1, i+1);
+        }
+        else{
+            return hasCountCopiesTR(arr, x, count, countTemp, i+1);
+        }
+}
 
     // This recursive method checks if the array is sorted in
     // non-decreasing order
 
     // Wrapper method
     public static boolean isSorted(ArrayList<Integer> list) {
-        // YOUR CODE HERE
         return false;
     }
 
