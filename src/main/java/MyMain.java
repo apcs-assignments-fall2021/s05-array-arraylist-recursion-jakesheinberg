@@ -182,7 +182,20 @@ public static boolean hasCountCopiesTR(int[]arr, int x, int count, int countTemp
 
     // Wrapper method
     public static boolean isSorted(ArrayList<Integer> list) {
-        return false;
+        return isSortedTR(list, 0);
+    }
+
+    // You may want a tail recursive method
+    public static boolean isSortedTR(ArrayList<Integer> list, int i) {
+        if (i == list.size()-1) {
+            return true;
+        }
+        if (list.get(i)<=list.get(i+1)){
+            return isSortedTR(list, i+1);
+        }
+        else{
+            return false;
+        }
     }
 
     // You may want a tail recursive method
@@ -216,9 +229,35 @@ public static boolean hasCountCopiesTR(int[]arr, int x, int count, int countTemp
 
     // No tail recursion necessary!
     public static boolean escape(char[][] mat, int row, int col) {
-        // YOUR CODE HERE
-        return false;
+        //check out of bounds
+        if (row < 0 || col < 0 || row >= mat.length || col >= mat[0].length){
+            return false;
+        }
+        // If we're at wall, don't do anything
+        else if (mat[row][col] == 'w') {
+            return false;
+        }
+        // If we've already visited there, let's return early
+        else if (mat[row][col] == '*') {
+            return false;
+        }
+
+        else if (mat[row][col] == 'f'){
+            return true;
+        }
+        else{
+            mat[row][col] = '*';
+
+            // Visit our neighbors (left, up, right, down)
+            boolean b1 = escape(mat, row, col-1);
+            boolean b2 = escape(mat, row-1, col);
+            boolean b3 = escape(mat, row, col+1);
+            boolean b4 = escape(mat, row+1, col);
+
+            return (b1 || b2 || b3 || b4);
+        }
     }
+
 
 
 
